@@ -12,7 +12,7 @@
     <title>SB Admin - Bootstrap Admin Template</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <?php echo link_tag('assets/css/bootstrap.min.css') ?>
 
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
