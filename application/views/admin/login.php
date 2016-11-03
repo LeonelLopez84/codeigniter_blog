@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link rel="stylesheet" href="../assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/login.css">
+    <?php 
+        echo link_tag('assets/bower_components/bootstrap/dist/css/bootstrap.min.css');
+        echo link_tag('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'); 
+        echo link_tag('assets/css/login.css');
+        ?>
+
 
 </head>
 <body>
@@ -18,22 +21,32 @@
                     <h3 class="panel-title">Login via site</h3>
                 </div>
                 <div class="panel-body">
-                    <form accept-charset="UTF-8" role="form">
+                    <?php if(!empty(validation_errors())){ ?>
+                        <div class="alert alert-danger" role="alert">
+                       <?php echo  validation_errors(); ?>
+                       </div>
+                    <?php }  
+
+                     echo form_open('admin/login/process',$form); ?>
+                
                     <fieldset>
                         <div class="form-group">
-                            <input class="form-control" placeholder="yourmail@example.com" name="email" type="text">
+                       <?php
+                            echo form_input($username);
+                         ?> 
                         </div>
                         <div class="form-group">
-                            <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                           <?php echo form_input($password); ?>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input name="remember" type="checkbox" value="Remember Me"> Remember Me
+                                <?php echo form_input($rememberme); ?>Remember Me
                             </label>
                         </div>
-                        <input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+                        <?php echo form_input($submit) ?>
                     </fieldset>
-                    </form>
+                    <?php echo form_close(); ?>
+
                       <hr/>
                     <center><h4>OR</h4></center>
                     <input class="btn btn-lg btn-facebook btn-block" type="submit" value="Login via facebook">
