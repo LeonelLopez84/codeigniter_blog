@@ -1,191 +1,233 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 08-11-2016 a las 22:49:28
+-- Versión del servidor: 10.1.16-MariaDB
+-- Versión de PHP: 5.6.24
 
-DROP SCHEMA IF EXISTS `blog` ;
-CREATE SCHEMA IF NOT EXISTS `blog` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
-USE `blog` ;
-
--- -----------------------------------------------------
--- Table `blog`.`author`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `blog`.`author` ;
-
-CREATE  TABLE IF NOT EXISTS `blog`.`author` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `username` VARCHAR(45) NOT NULL ,
-  `email` VARCHAR(100) NOT NULL ,
-  `password` VARCHAR(255) NOT NULL ,
-  `first_name` VARCHAR(45) NOT NULL ,
-  `last_name` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
--- -----------------------------------------------------
--- Table `blog`.`post`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `blog`.`post` ;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-CREATE  TABLE IF NOT EXISTS `blog`.`post` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `title` VARCHAR(45) NOT NULL ,
-  `article` TEXT NOT NULL ,
-  `title_clean` VARCHAR(45) NOT NULL ,
-  `file` VARCHAR(255) NOT NULL ,
-  `author_id` INT NOT NULL ,
-  `date_publish` TIMESTAMP NOT NULL ,
-  `banner_image` VARCHAR(45) NOT NULL ,
-  `featured` TINYINT NOT NULL DEFAULT 0 ,
-  `enabled` TINYINT NOT NULL DEFAULT 1 ,
-  `comments_enabled` TINYINT NOT NULL DEFAULT 1 ,
-  `views` INT NOT NULL ,
-  PRIMARY KEY (`id`, `author_id`) ,
-  INDEX `fk_post_author1_idx` (`author_id` ASC) ,
-  CONSTRAINT `fk_post_author1`
-    FOREIGN KEY (`author_id` )
-    REFERENCES `blog`.`author` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Base de datos: `blog`
+--
+CREATE DATABASE IF NOT EXISTS `blog` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `blog`;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `blog`.`category`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `blog`.`category` ;
+--
+-- Estructura de tabla para la tabla `author`
+--
 
-CREATE  TABLE IF NOT EXISTS `blog`.`category` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
-  `enabled` TINYINT NOT NULL ,
-  `date_created` TIMESTAMP NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+DROP TABLE IF EXISTS `author`;
+CREATE TABLE IF NOT EXISTS `author` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `author`
+--
 
--- -----------------------------------------------------
--- Table `blog`.`post_category`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `blog`.`post_category` ;
+INSERT INTO `author` (`id`, `username`, `email`, `password`, `first_name`, `last_name`) VALUES
+(1, 'harry', 'harry.popotes@example.com.mx', '827ccb0eea8a706c4c34a16891f84e7b', 'harry', 'popotes');
 
-CREATE  TABLE IF NOT EXISTS `blog`.`post_category` (
-  `category_id` INT NOT NULL ,
-  `post_id` INT NOT NULL ,
-  PRIMARY KEY (`category_id`, `post_id`) ,
-  INDEX `fk_category_has_post_post1_idx` (`post_id` ASC) ,
-  INDEX `fk_category_has_post_category_idx` (`category_id` ASC) ,
-  CONSTRAINT `fk_category_has_post_category`
-    FOREIGN KEY (`category_id` )
-    REFERENCES `blog`.`category` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_category_has_post_post1`
-    FOREIGN KEY (`post_id` )
-    REFERENCES `blog`.`post` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `category`
+--
 
--- -----------------------------------------------------
--- Table `blog`.`tag`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `blog`.`tag` ;
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `enabled` tinyint(4) NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE  TABLE IF NOT EXISTS `blog`.`tag` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `post_id` INT NOT NULL ,
-  `tag` VARCHAR(45) NOT NULL ,
-  `tag_clean` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`id`, `post_id`) ,
-  INDEX `fk_tag_post1_idx` (`post_id` ASC) ,
-  CONSTRAINT `fk_tag_post1`
-    FOREIGN KEY (`post_id` )
-    REFERENCES `blog`.`post` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `comment`
+--
 
--- -----------------------------------------------------
--- Table `blog`.`related`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `blog`.`related` ;
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE IF NOT EXISTS `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  `is_reply_to_id` int(11) NOT NULL DEFAULT '0',
+  `comment` text COLLATE utf8_unicode_ci NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `mark_read` tinyint(4) NOT NULL DEFAULT '0',
+  `enabled` tinyint(4) NOT NULL DEFAULT '1',
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`,`post_id`,`user_id`),
+  KEY `fk_comment_user1_idx` (`user_id`),
+  KEY `fk_comment_post1_idx` (`post_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE  TABLE IF NOT EXISTS `blog`.`related` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `post_id` INT NOT NULL ,
-  PRIMARY KEY (`id`, `post_id`) ,
-  INDEX `fk_related_post1_idx` (`post_id` ASC) ,
-  CONSTRAINT `fk_related_post1`
-    FOREIGN KEY (`post_id` )
-    REFERENCES `blog`.`post` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `opcion`
+--
 
--- -----------------------------------------------------
--- Table `blog`.`user`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `blog`.`user` ;
+DROP TABLE IF EXISTS `opcion`;
+CREATE TABLE IF NOT EXISTS `opcion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `opcion` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `opcion_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE  TABLE IF NOT EXISTS `blog`.`user` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
-  `email` VARCHAR(45) NOT NULL ,
-  `website` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+--
+-- Volcado de datos para la tabla `opcion`
+--
 
+INSERT INTO `opcion` (`id`, `opcion`, `enabled`, `opcion_id`) VALUES
+(3, 'Post', 1, 0),
+(4, 'Autores', 1, 0),
+(5, 'Categorias', 1, 0),
+(6, 'Todos los Post', 1, 3),
+(7, 'Todas las Categorias', 1, 5);
 
--- -----------------------------------------------------
--- Table `blog`.`comment`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `blog`.`comment` ;
+-- --------------------------------------------------------
 
-CREATE  TABLE IF NOT EXISTS `blog`.`comment` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `post_id` INT NOT NULL ,
-  `is_reply_to_id` INT NOT NULL DEFAULT 0 ,
-  `comment` TEXT NOT NULL ,
-  `user_id` INT NOT NULL ,
-  `mark_read` TINYINT NOT NULL DEFAULT 0 ,
-  `enabled` TINYINT NOT NULL DEFAULT 1 ,
-  `date` TIMESTAMP NOT NULL ,
-  PRIMARY KEY (`id`, `post_id`, `user_id`) ,
-  INDEX `fk_comment_user1_idx` (`user_id` ASC) ,
-  INDEX `fk_comment_post1_idx` (`post_id` ASC) ,
-  CONSTRAINT `fk_comment_user1`
-    FOREIGN KEY (`user_id` )
-    REFERENCES `blog`.`user` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_comment_post1`
-    FOREIGN KEY (`post_id` )
-    REFERENCES `blog`.`post` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `post`
+--
 
+DROP TABLE IF EXISTS `post`;
+CREATE TABLE IF NOT EXISTS `post` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `article` text COLLATE utf8_unicode_ci NOT NULL,
+  `title_clean` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `file` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `author_id` int(11) NOT NULL,
+  `date_publish` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `banner_image` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `featured` tinyint(4) NOT NULL DEFAULT '0',
+  `enabled` tinyint(4) NOT NULL DEFAULT '1',
+  `comments_enabled` tinyint(4) NOT NULL DEFAULT '1',
+  `views` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`author_id`),
+  KEY `fk_post_author1_idx` (`author_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- -----------------------------------------------------
--- Table `blog`.`opcion`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `blog`.`opcion` ;
+-- --------------------------------------------------------
 
-CREATE  TABLE IF NOT EXISTS `blog`.`opcion` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `opcion` VARCHAR(100) NOT NULL ,
-  `enabled` TINYINT(1) NOT NULL DEFAULT 1 ,
-  `opcion_id` INT NOT NULL DEFAULT 0 ,
-  PRIMARY KEY (`id`, `opcion_id`) )
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `post_category`
+--
 
-USE `blog` ;
+DROP TABLE IF EXISTS `post_category`;
+CREATE TABLE IF NOT EXISTS `post_category` (
+  `category_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  PRIMARY KEY (`category_id`,`post_id`),
+  KEY `fk_category_has_post_post1_idx` (`post_id`),
+  KEY `fk_category_has_post_category_idx` (`category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+-- --------------------------------------------------------
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+--
+-- Estructura de tabla para la tabla `related`
+--
+
+DROP TABLE IF EXISTS `related`;
+CREATE TABLE IF NOT EXISTS `related` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`,`post_id`),
+  KEY `fk_related_post1_idx` (`post_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tag`
+--
+
+DROP TABLE IF EXISTS `tag`;
+CREATE TABLE IF NOT EXISTS `tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  `tag` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `tag_clean` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`,`post_id`),
+  KEY `fk_tag_post1_idx` (`post_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `website` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `fk_comment_post1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_comment_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `post`
+--
+ALTER TABLE `post`
+  ADD CONSTRAINT `fk_post_author1` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `post_category`
+--
+ALTER TABLE `post_category`
+  ADD CONSTRAINT `fk_category_has_post_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_category_has_post_post1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `related`
+--
+ALTER TABLE `related`
+  ADD CONSTRAINT `fk_related_post1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `tag`
+--
+ALTER TABLE `tag`
+  ADD CONSTRAINT `fk_tag_post1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

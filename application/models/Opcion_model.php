@@ -6,12 +6,19 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class Opcion_model extends Eloquent {
 
 	protected $table = 'opcion';
+	public $timestamps = false;
+
 
 	public function __construct()
 	{
 		parent::__construct();
 		//Do your magic here
 	}
+
+	public function subOpcion()
+    {
+        return $this->hasMany('Opcion_model','opcion_id', 'id');
+    }
 
 }
 

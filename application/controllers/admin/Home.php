@@ -11,13 +11,24 @@ class Home extends CI_Controller
 	{
 		parent::__construct();
 
-		$this->body['session']=(object)$this->session->userdata('logged_in');
+		$session=$this->session->userdata('logged_in');
+
+		if(is_null($session)){
+			redirect('admin/login','refresh');
+		}
+
+		$this->body['session']=(object)$session;
 
 		$this->templates = new League\Plates\Engine(APPPATH.'views/admin/templates');
 
 		$this->load->model('opcion_model');   	
-		$this->body['opciones'] = opcion_model::all();
 
+		$opciones = (object)opcion_model::orderBy('opcion','ASC')->where('opcion_id', '=', '0')->get();
+		foreach($opciones as $k=>$opcion){
+
+			$this->body['opciones'][$k] = $opcion;
+			$this->body['opciones'][$k]['subopcion']=(object)opcion_model::find($opcion->id)->subOpcion;
+		}
 	}
 
 	public function index()

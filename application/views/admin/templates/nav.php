@@ -7,7 +7,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Blog Codeingniter</a>
+                <a class="navbar-brand" href="../admin/home">Blog Codeingniter</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -114,12 +114,24 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                 <?php foreach($opciones as $val){ ?>
-                    <li class="active">
-                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i><?php echo $val->opcion ?></a>
+
+                <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#<?php echo url_title(strtolower($val->opcion)) ?>"><?php echo $val->opcion ?><i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="<?php echo strtolower($val->opcion) ?>" class="collapse">
+                        <?php foreach($val['subopcion'] as $y=>$val2){ ?>
+                            <li>
+                                <a href="../admin/<?php echo url_title(strtolower($val->opcion)).'/'.url_title(strtolower($val2->opcion)) ?>"><i class="fa fa-thumb-tack"></i> <?php echo $val2->opcion ?></a>
+                            </li>
+                            <?php } ?>
+                        </ul>
                     </li>
+
+                   <!-- <li class="active">
+                        <a href="../admin/<?php echo strtolower($val->opcion) ?>"><i class="fa fa-thumb-tack"></i>  <?php echo $val->opcion ?></a>
+                    </li>-->
                     
                     <?php }  ?>
-                    <li>
+                  <!-- <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
@@ -135,7 +147,7 @@
                     </li>
                     <li>
                         <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
