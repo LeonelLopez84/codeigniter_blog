@@ -116,38 +116,19 @@
                 <?php foreach($opciones as $val){ ?>
 
                 <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#<?php echo url_title(strtolower($val->opcion)) ?>"><?php echo $val->opcion ?><i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="<?php echo strtolower($val->opcion) ?>" class="collapse">
-                        <?php foreach($val['subopcion'] as $y=>$val2){ ?>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#<?php echo url_title(strtolower($val['opcion'])) ?>"><?php echo $val->opcion ?><i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="<?php echo strtolower($val['opcion']) ?>" class="collapse">
+                        <?php foreach($val['subOpcion'] as $val2){ ?>
                             <li>
-                                <a href="../admin/<?php echo url_title(strtolower($val->opcion)).'/'.url_title(strtolower($val2->opcion)) ?>"><i class="fa fa-thumb-tack"></i> <?php echo $val2->opcion ?></a>
+                                <a href="<?php echo base_url('/admin/'.url_title(strtolower($val['opcion'])).'/'.url_title(strtolower($val2['opcion']))) ?>"><i class="fa fa-thumb-tack"></i> <?php echo $val2['opcion'] ?></a>
                             </li>
                             <?php } ?>
                         </ul>
                     </li>
 
-                   <!-- <li class="active">
-                        <a href="../admin/<?php echo strtolower($val->opcion) ?>"><i class="fa fa-thumb-tack"></i>  <?php echo $val->opcion ?></a>
-                    </li>-->
                     
                     <?php }  ?>
-                  <!-- <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
-                            <li>
-                                <a href="#">Dropdown Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Dropdown Item</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-                    </li>
-                    <li>
-                        <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-                    </li>-->
+                 
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

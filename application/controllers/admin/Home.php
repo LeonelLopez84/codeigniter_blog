@@ -19,22 +19,19 @@ class Home extends CI_Controller
 
 		$this->body['session']=(object)$session;
 
-		$this->templates = new League\Plates\Engine(APPPATH.'views/admin/templates');
+		$this->templates = new League\Plates\Engine(APPPATH.'views/admin');
 
 		$this->load->model('opcion_model');   	
 
-		$opciones = (object)opcion_model::orderBy('opcion','ASC')->where('opcion_id', '=', '0')->get();
-		foreach($opciones as $k=>$opcion){
+		$this->body['opciones'] = opcion_model::with('subOpcion')->orderBy('opcion','ASC')->where('opcion_id', '=', '0')->get();
+		
 
-			$this->body['opciones'][$k] = $opcion;
-			$this->body['opciones'][$k]['subopcion']=(object)opcion_model::find($opcion->id)->subOpcion;
-		}
 	}
 
 	public function index()
 	{
 
-		echo $this->templates->render('home',$this->body);
+		echo $this->templates->render('home/home',$this->body);
 	}
 
 }

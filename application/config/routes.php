@@ -52,3 +52,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['admin/autores/todos-los-autores'] = 'admin/autores/index';
+$route['admin/autores/nuevo-autor'] = 'admin/autores/create';
+
+$route['admin/categorias/todas-las-categorias'] = 'admin/categorias/index';
+$route['admin/categorias/nueva-categoria'] = 'admin/categorias/create';
+
+$route['admin/post/todos-los-post'] = 'admin/post/index';
+$route['admin/post/nuevo-post'] = 'admin/post/create';
+
