@@ -1,13 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-use Illuminate\Database\Eloquent\Model as Eloquent;
- 
-class Author_model extends Eloquent {
- 
- 	protected $table = 'author';
- 	public $timestamps = false;
+class Author_model extends CI_Model {
 
+	protected $tablename='author';
 
 	public function __construct()
 	{
