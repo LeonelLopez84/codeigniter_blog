@@ -6,6 +6,7 @@ class Home extends CI_Controller
 	public $session_data=array();
 	public $body=array();
 	public $templates;
+	protected $upload_config=array();
 
 	public function __construct()
 	{
@@ -24,6 +25,11 @@ class Home extends CI_Controller
 		$this->load->model('opcion_model');   	
 
 		$this->body['opciones'] = opcion_model::with('subOpcion')->orderBy('opcion','ASC')->where('opcion_id', '=', '0')->get();
+		
+		$this->upload_config['max_size']     = '100';
+		$this->upload_config['max_width'] = '1024';
+		$this->upload_config['max_height'] = '768';
+
 		
 
 	}
