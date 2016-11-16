@@ -26,7 +26,7 @@ class Home extends CI_Controller
 
 		$this->body['opciones'] = opcion_model::with('subOpcion')->orderBy('opcion','ASC')->where('opcion_id', '=', '0')->get();
 		
-		$this->upload_config['max_size']     = '100';
+		$this->upload_config['max_size']  = '100';
 		$this->upload_config['max_width'] = '1024';
 		$this->upload_config['max_height'] = '768';
 

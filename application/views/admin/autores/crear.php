@@ -36,6 +36,11 @@
 							    <?php echo form_input($passconf); ?>
 							  </div>
 							  <div class="form-group">
+							   <?php if(isset($error_file)){ ?>
+	                        <div class="alert alert-danger" role="alert">
+	                       <?php echo $error_file['error'] ?>
+	                       </div>
+	                    <?php }  ?>
 							    <label>Photo</label>
 							    <?php echo form_input($userfile); ?>
 							    <p class="help-block">Photo de perfil.</p>

@@ -119,7 +119,9 @@ class Autores extends Home {
 
 			if ( ! $this->upload->do_upload('userfile')){
                 $this->body['error_file'] = array('error' => $this->upload->display_errors());
+
                 echo $this->templates->render('autores/crear',$this->body);	
+                
             }else{
 				redirect('admin/autores/todos-los-autores','refresh');
 
