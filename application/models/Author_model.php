@@ -15,7 +15,7 @@ class Author_model extends Eloquent {
 	}
 
 
-	public function login($username,$password)
+	/*public function login($username,$password)
 	{
 		$this->db->select("id, username, email");
 		$this->db->from($this->tablename);
@@ -32,7 +32,7 @@ class Author_model extends Eloquent {
 			return false;
 		}
 
-	}
+	}*/
 
 	
 

@@ -1,6 +1,8 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use Illuminate\Database\Query\Builder;
+
 class Login extends CI_Controller {
 
 	public $body=[];
@@ -83,8 +85,10 @@ class Login extends CI_Controller {
 	{
 
 	   $username = $this->input->post('username');
-	   $result = $this->author_model->login($username, $password);
-	 
+
+
+	   $result = author_model::where('username', $username)->where('password',md5($password))->take(1)->get();
+
 	   if($result)
 	   {
 		   	foreach($result as $row){
