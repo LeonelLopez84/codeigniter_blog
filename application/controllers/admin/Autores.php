@@ -16,6 +16,15 @@ class Autores extends Home {
                             'enctype'=>"multipart/form-data"
                             ]; 
 
+        $this->body['id']=[
+                            'type'          => 'text',
+                            'name'          => 'id',
+                            'value'         => set_value('id'),
+                            'class'         => 'form-control',
+                            'placeholder'   => '0',
+                            'id'            => 'id',
+                            'disabled'       => 'disable'
+                            ];
 		$this->body['username']=[
                             'type'          => 'text',
                             'name'          => 'username',
@@ -88,6 +97,18 @@ class Autores extends Home {
 		echo $this->templates->render('autores/crear',$this->body);
 	}
 
+    public function editar($id=null)
+    {
+        if(!is_null($id)){
+
+            $autor=author_model::find($id);
+            $this->body['id']['value']=$autor->id;
+            $this->body['username']['value']=$autor->username;
+            $this->body['email']['value']=$autor->email;
+            echo $this->templates->render('autores/editar',$this->body);
+        }
+    }
+
 	public function create()
 	{
 		$id=0;
@@ -97,21 +118,19 @@ class Autores extends Home {
         $this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|xss_clean|matches[password]');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
 
-
-
         if ($this->form_validation->run() == FALSE){
 
             echo $this->templates->render('autores/crear',$this->body);	
 
 		}else{
 
-					$Autor=new author_model;
+			$Autor=new author_model;
 
-					$Autor->username=$this->input->post('username');
-					$Autor->email=$this->input->post('email');
-					$Autor->password=md5($this->input->post('password'));
+			$Autor->username=$this->input->post('username');
+			$Autor->email=$this->input->post('email');
+			$Autor->password=md5($this->input->post('password'));
 
-					$Autor->save();
+			$Autor->save();
 
 
 			$this->upload_config['file_name'] = $Autor->id.'.jpg';
@@ -129,10 +148,37 @@ class Autores extends Home {
 		}
 	}
 
-	public function editar($id=null)
+	public function update($id=null)
 	{
+        if ($this->form_validation->run() == FALSE){
 
-		echo $this->templates->render('autores/editar',$this->body);
+            echo $this->templates->render('autores/editar',$this->body); 
+
+        }else{
+
+            $Autor=new author_model;
+
+            $Autor->username=$this->input->post('username');
+            $Autor->email=$this->input->post('email');
+            $Autor->password=md5($this->input->post('password'));
+
+           // $Autor->save();
+
+
+            $this->upload_config['file_name'] = $Autor->id.'.jpg';
+            $this->upload->initialize($this->upload_config);
+
+            if ( ! $this->upload->do_upload('userfile')){
+                $this->body['error_file'] = array('error' => $this->upload->display_errors());
+
+                echo $this->templates->render('autores/editar',$this->body); 
+                
+            }else{
+                redirect('admin/autores/todos-los-autores','refresh');
+
+            }
+        }
+		
 	}
 
 }
