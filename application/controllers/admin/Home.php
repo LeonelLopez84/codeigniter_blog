@@ -29,6 +29,7 @@ class Home extends CI_Controller
 		$this->upload_config['max_size']  = '100';
 		$this->upload_config['max_width'] = '1024';
 		$this->upload_config['max_height'] = '768';
+		$this->upload_config['overwrite'] = true;
 
 		
 
