@@ -54,8 +54,8 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['admin/autores/todos-los-autores'] = 'admin/autores/index';
-$route['admin/autores/editar-autor/(:num)'] = 'admin/autores/editar/$1';
-$route['admin/autores/nuevo-autor'] = 'admin/autores/nuevo';
+$route['admin/autores/editar/(:num)'] = 'admin/autores/editar/$1';
+$route['admin/autores/nuevo'] = 'admin/autores/nuevo';
 
 $route['admin/categorias/todas-las-categorias'] = 'admin/categorias/index';
 $route['admin/categorias/editar-categoria'] = 'admin/categorias/editar';

@@ -25,6 +25,14 @@ class Autores extends Home {
                             'id'            => 'id',
                             'disabled'       => 'disable'
                             ];
+        $this->body['id_hidden']=[
+                            'type'          => 'hidden',
+                            'name'          => 'id_hidden',
+                            'value'         => set_value('id_hidden'),
+                            'class'         => 'form-control',
+                            'placeholder'   => '0',
+                            'id'            => 'id_hidden',
+                            ];
 		$this->body['username']=[
                             'type'          => 'text',
                             'name'          => 'username',
@@ -103,11 +111,28 @@ class Autores extends Home {
 
             $autor=author_model::find($id);
             $this->body['id']['value']=$autor->id;
+            $this->body['id_hidden']['value']=$autor->id;
             $this->body['username']['value']=$autor->username;
             $this->body['email']['value']=$autor->email;
+            $this->body['submit']['value']='Save';
+            $this->body['submit']['value']='btn btn-info';
+
             echo $this->templates->render('autores/editar',$this->body);
         }
     }
+
+    public function borrar($id=null)
+    {
+        if(!is_null($id)){
+            $autor=author_model::find($id);
+
+            $this->body['autor']=$autor; 
+
+            echo $this->templates->render('autores/borrar',$this->body);
+        }
+    }
+
+    
 
 	public function create()
 	{
@@ -148,24 +173,27 @@ class Autores extends Home {
 		}
 	}
 
-	public function update($id=null)
+	public function update()
 	{
+
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
+
         if ($this->form_validation->run() == FALSE){
 
             echo $this->templates->render('autores/editar',$this->body); 
 
         }else{
 
-            $Autor=new author_model;
+            $id=$this->input->post('id_hidden');
 
+            $Autor=author_model::find($id);
             $Autor->username=$this->input->post('username');
             $Autor->email=$this->input->post('email');
-            $Autor->password=md5($this->input->post('password'));
-
-           // $Autor->save();
+            $Autor->save();
 
 
-            $this->upload_config['file_name'] = $Autor->id.'.jpg';
+            $this->upload_config['file_name'] = $id.'.jpg';
             $this->upload->initialize($this->upload_config);
 
             if ( ! $this->upload->do_upload('userfile')){
@@ -180,6 +208,17 @@ class Autores extends Home {
         }
 		
 	}
+
+    public function delete($id=null)
+    {
+        if(!is_null($id))
+        {
+            $Autor=author_model::find($id);
+            $Autor->delete();
+
+            redirect('admin/autores/todos-los-autores','refresh');            
+        }
+    }
 
 }
 

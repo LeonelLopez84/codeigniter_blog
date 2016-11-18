@@ -18,10 +18,12 @@
                         <?php }  ?>
                         <div class="row">
                             <div class="col-sm-6 col-md-6 col-lg-6">
-                            <?php echo form_open_multipart('admin/autores/create',$form); ?>
+                            <?php echo form_open_multipart('admin/autores/update',$form); ?>
                             <div class="form-group">
                                 <label >id</label>
                                  <?php echo form_input($id); ?>
+                                 <?php echo form_input($id_hidden); ?>
+
                               </div>
                               <div class="form-group">
                                 <label >Username</label>
@@ -30,14 +32,6 @@
                                <div class="form-group">
                                 <label >Email</label>
                                  <?php echo form_input($email); ?>
-                              </div>
-                              <div class="form-group">
-                                <label >Password</label>
-                                <?php echo form_input($password); ?>
-                              </div>
-                              <div class="form-group">
-                                <label>Confirm Password</label>
-                                <?php echo form_input($passconf); ?>
                               </div>
                               <div class="form-group">
                                <?php if(isset($error_file)){ ?>

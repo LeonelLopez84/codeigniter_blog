@@ -47,8 +47,8 @@
 	                               		<?php echo $val->email ?>
 	                            	</td>
 	                            	<td>
-	                            		<a href="<?php echo base_url('/admin/autores/editar-autor/'.$val->id) ?>" class="btn btn-small btn-info"><i class="fa fa-pencil"></i></a>
-	                            		<a href="<?php echo base_url('/admin/autores/borrar-autor/'.$val->id) ?>" class="btn btn-small btn-danger" name="" value="<?php echo $val->id ?>"><i class="fa fa-trash"></i></a>
+	                            		<a href="<?php echo base_url('/admin/autores/editar/'.$val->id) ?>" class="btn btn-small btn-info"><i class="fa fa-pencil"></i></a>
+	                            		<a href="<?php echo base_url('/admin/autores/borrar/'.$val->id) ?>" class="btn btn-small btn-danger" name="" value="<?php echo $val->id ?>"><i class="fa fa-trash"></i></a>
 	                            	</td>
 	                            </tr>
 	                        <?php } ?>
