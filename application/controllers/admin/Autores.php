@@ -6,9 +6,7 @@ require APPPATH.'controllers/admin/Home.php';
 class Autores extends Home {
 
 	public function __construct()
-	{
-
-        
+	{ 
 		parent::__construct();
 		$this->load->model('author_model');
 

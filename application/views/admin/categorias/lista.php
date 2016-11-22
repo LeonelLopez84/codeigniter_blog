@@ -28,8 +28,8 @@
                         	<tr>
                         		<th>#</th>
                         		<th>Name</th>
-                        		<th>Regisgtro</th>
-                        		
+                        		<th>Registro</th>
+                                <th>Enabled</th>                        		
                         	</tr>
                         </thead>
                         <tbody>
@@ -43,6 +43,10 @@
 	                            	<td>
 	                               		<?php echo $val->date_created ?>
 	                            	</td>
+                                    <td>
+                                        <?php $class=($val->enabled)?'fa fa-eye':'fa fa-eye-slash'; ?>
+                                        <i class="<?php echo $class ?>"></i>
+                                    </td>
 	                            	<td>
 	                            		<a href="<?php echo base_url('/admin/categorias/editar/'.$val->id) ?>" class="btn btn-small btn-info"><i class="fa fa-pencil"></i></a>
 	                            		<a href="<?php echo base_url('/admin/categorias/borrar/'.$val->id) ?>" class="btn btn-small btn-danger" name="" value="<?php echo $val->id ?>"><i class="fa fa-trash"></i></a>
