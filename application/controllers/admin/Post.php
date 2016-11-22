@@ -7,6 +7,7 @@ class Post extends Home {
 
 	public function __construct()
 	{
+		
 		parent::__construct();
 	}
 
