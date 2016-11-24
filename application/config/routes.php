@@ -62,5 +62,5 @@ $route['admin/categorias/editar(:num)'] = 'admin/categorias/editar/$1';
 $route['admin/categorias/nueva'] = 'admin/categorias/nueva';
 
 $route['admin/post/todos-los-post'] = 'admin/post/index';
-$route['admin/post/nuevo-post'] = 'admin/post/nuevo';
+$route['admin/post/nuevo'] = 'admin/post/nuevo';
 

@@ -21,6 +21,7 @@ class Migration_Add_Post extends  MyMigration{
                         'constraint' => 11,
                         'unsigned' => FALSE,
                         'auto_increment' => TRUE,
+                        'null'=>false, 
                         'primary_key'=>TRUE
                 );
 
@@ -38,16 +39,6 @@ class Migration_Add_Post extends  MyMigration{
                         'constraint' => '255',
                 );
 
-                $file = array(
-                        'type' => 'VARCHAR',
-                        'constraint' => '255',
-                );
-
-                $banner_image = array(
-                        'type' => 'VARCHAR',
-                        'constraint' => '255',
-                );
-
                 $featured = array(
                         'type' => 'TINYINT',
                         'constraint' => 1,
@@ -58,6 +49,11 @@ class Migration_Add_Post extends  MyMigration{
                         'type' => 'TINYINT',
                         'constraint' => 1,
                         'default'=>1
+                );
+
+                $date = array(
+                        'type' => 'TIMESTAMP',
+                        'null'=>false
                 );
 
                 $views = array(
@@ -81,8 +77,7 @@ class Migration_Add_Post extends  MyMigration{
                         'id' => $id,
                         'title'=> $title,
                         'article'=> $article,
-                        'file'=> $file,
-                        'banner_image'=> $banner_image,
+                        'banner'=> $banner,
                         'featured' => $featured,
                         'enabled' => $enabled,
                         'views'=> $views,

@@ -57,7 +57,8 @@ class Categorias extends Home {
                             'id'            => 'submit',
                             'value'         => 'Create'
                             ];
-
+                            
+        
 	}
 
 	public function index()
@@ -89,6 +90,18 @@ class Categorias extends Home {
             echo $this->templates->render('categorias/editar',$this->body);
         }
 	}
+
+    public function borrar($id=null)
+    {
+        if(!is_null($id))
+        {
+
+            $this->body['categoria']=categoria_model::find($id); 
+
+            echo $this->templates->render('categorias/borrar',$this->body); 
+        }
+
+    }
 
 	public function create()
 	{
@@ -131,8 +144,19 @@ class Categorias extends Home {
 
            	redirect('admin/categorias/todas-las-categorias','refresh');
 
-            }
         }
+    }
+
+    public function delete($id=null)
+    {
+        if(!is_null($id))
+        {
+            $categoria=categoria_model::find($id);
+            $categoria->delete();
+
+            redirect('admin/categorias/todas-las-categorias','refresh');            
+        }
+    }
 
 }
 

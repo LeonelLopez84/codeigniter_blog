@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller 
 {
-	public $session_data=array();
 	public $body=array();
 	public $templates;
 	protected $upload_config=array();

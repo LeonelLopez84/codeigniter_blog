@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require APPPATH.'migrations/mymigration.php';
+require APPPATH.'libraries/mymigration.php';
 
 class Migration_Add_Opcion extends  MyMigration{
 

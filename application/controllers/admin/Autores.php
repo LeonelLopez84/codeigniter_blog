@@ -88,7 +88,7 @@ class Autores extends Home {
                             'id'            => 'submit',
                             'value'         => 'Create'
                             ];
-		$this->upload_config['upload_path'] = './assets/img/autores/';
+		$this->upload_config['upload_path'] = './assets/img/'.strtolower(__CLASS__).'/';
 		$this->upload_config['allowed_types'] = 'gif|jpg|png';
 
 		
@@ -131,8 +131,6 @@ class Autores extends Home {
             echo $this->templates->render('autores/borrar',$this->body);
         }
     }
-
-    
 
 	public function create()
 	{
