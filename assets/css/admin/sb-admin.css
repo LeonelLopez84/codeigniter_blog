@@ -231,3 +231,10 @@ footer{
     width: 50%;
     text-align: center;
 }
+
+/* MIS ESTILOS */
+
+.img-thumbnail{
+    max-width: 250px;
+    height: auto;
+}

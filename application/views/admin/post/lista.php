@@ -29,7 +29,10 @@
                         		<th>#</th>
                         		<th>Picture</th>
                         		<th>Title</th>
-                        		<th>Date</th>
+                        		<th>Featured</th>
+                                <th>Enabled</th>
+                                <th>Date</th>
+                                <th>Author</th>
                         		<th>Action</th>
                         	</tr>
                         </thead>
@@ -43,8 +46,17 @@
 									<td>
 	                               		<a href="index.html"><?php echo $val->title ?></a>
 	                            	</td>
+                                     <td>
+                                        <i class="<?php echo ($val->featured)?'fa fa-star':'fa fa-star-o'; ?>"></i>
+                                    </td>
+                                     <td>
+                                        <i class="<?php echo ($val->enabled)?'fa fa-eye':'fa fa-eye-slash'; ?>"></i>
+                                    </td>
+                                    <td>
+                                        <?php echo $val->date ?>
+                                    </td>
 	                            	<td>
-	                               		<?php echo $val->date ?>
+                                        <?php echo $val->author->username ?>
 	                            	</td>
 	                            	<td>
 	                            		<a href="<?php echo base_url('/admin/post/editar/'.$val->id) ?>" class="btn btn-small btn-info"><i class="fa fa-pencil"></i></a>
@@ -54,6 +66,11 @@
 	                        <?php } ?>
 	                    	</tbody>
                         </table>
+
+                        <blockquote >
+                            <pre><?php echo $post->hasMorePages() ?></pre>  
+                        </blockquote>
+
                     </div>
                 </div>
                 <!-- /.row -->

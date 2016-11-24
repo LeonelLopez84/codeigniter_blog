@@ -34,11 +34,6 @@ class Migration_Add_Post extends  MyMigration{
                         'type'=>'TEXT',
                 );
 
-                $title_clean = array(
-                        'type' => 'VARCHAR',
-                        'constraint' => '255',
-                );
-
                 $featured = array(
                         'type' => 'TINYINT',
                         'constraint' => 1,
@@ -77,9 +72,9 @@ class Migration_Add_Post extends  MyMigration{
                         'id' => $id,
                         'title'=> $title,
                         'article'=> $article,
-                        'banner'=> $banner,
                         'featured' => $featured,
                         'enabled' => $enabled,
+                        'date'=>$date,
                         'views'=> $views,
                         'author_id' => $author_id
                 );

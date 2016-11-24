@@ -13,6 +13,11 @@ class Post_model extends Eloquent {
 	{
 		parent::__construct();
 	}
+
+	public function author()
+    {
+        return $this->belongsTo('Author_model','author_id','id');
+    }
 	
 
 }

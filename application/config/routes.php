@@ -58,9 +58,11 @@ $route['admin/autores/editar/(:num)'] = 'admin/autores/editar/$1';
 $route['admin/autores/nuevo'] = 'admin/autores/nuevo';
 
 $route['admin/categorias/todas-las-categorias'] = 'admin/categorias/index';
-$route['admin/categorias/editar(:num)'] = 'admin/categorias/editar/$1';
+$route['admin/categorias/editar/(:num)'] = 'admin/categorias/editar/$1';
 $route['admin/categorias/nueva'] = 'admin/categorias/nueva';
 
 $route['admin/post/todos-los-post'] = 'admin/post/index';
+$route['admin/post/todos-los-post/(:num)'] = 'admin/post/index/$1';
+$route['admin/post/editar/(:num)'] = 'admin/post/editar/$1';
 $route['admin/post/nuevo'] = 'admin/post/nuevo';
 
