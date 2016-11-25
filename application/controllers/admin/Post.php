@@ -56,7 +56,7 @@ class Post extends Home {
                             'name'        => 'article',
 					       'id'          => 'article',
 					       'value'       => set_value('article'),
-					       'rows'        => '10',
+					       'rows'        => '15',
 					       'cols'        => '10',
 					       'style'       => 'width:100%',
 					       'class'       => 'form-control'

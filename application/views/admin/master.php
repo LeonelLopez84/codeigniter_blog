@@ -16,6 +16,8 @@
    		echo link_tag('assets/bower_components/bootstrap/dist/css/bootstrap.min.css');
    		echo link_tag('assets/css/admin/sb-admin.css');
 		echo link_tag('assets/bower_components/font-awesome/css/font-awesome.min.css');
+        echo link_tag('assets/bower_components/medium-editor/dist/css/medium-editor.min.css');
+        
 	?>
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -38,7 +40,12 @@
         </div>
     </div>
     <script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/bower_components/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/bower_components/medium-editor/dist/js/medium-editor.min.js'); ?>"></script>
+    <script>
+        var editor = new MediumEditor('.article');
+    </script>
 
 </body>
 
