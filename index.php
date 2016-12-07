@@ -55,6 +55,10 @@
  */
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
+	date_default_timezone_set('America/Mexico_City');
+
+	setlocale('LC_ALL','es_MX');
+
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING

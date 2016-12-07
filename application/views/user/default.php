@@ -10,14 +10,10 @@
                 </h1>
 
                 <?php 
-                $i=0;
-                while($i < 3){
-                  $this->insert('post_list');
-                  ++$i;
+                foreach($posts as $post){
+                  $this->insert('post_list',['post'=>$post]);                  
                 }
                 ?>
-
-
                 <!-- Pager -->
                 <ul class="pager">
                     <li class="previous">

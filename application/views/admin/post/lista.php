@@ -68,7 +68,7 @@
                         </table>
 
                         <blockquote >
-                            <pre><?php echo $post->redner() ?></pre>  
+                            <pre><?php //echo $post->redner() ?></pre>  
                         </blockquote>
 
                     </div>

@@ -2,4 +2,4 @@
     $this->layout('master');
 
     $this->insert('nav');
-    $this->insert('default');
+    $this->insert('default',['posts'=>$posts]);

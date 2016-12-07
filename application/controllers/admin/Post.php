@@ -89,7 +89,7 @@ class Post extends Home {
 
 	public function index($page=null)
 	{
-		$this->body['post']=post_model::with('author')->orderBy('date','desc')->paginate(2);
+		$this->body['post']=post_model::with('author')->orderBy('date','desc')->paginate(15);
         $this->body['post']->setPath("admin/post/todos-los-post/");
 
 		echo $this->templates->render('post/lista',$this->body);
