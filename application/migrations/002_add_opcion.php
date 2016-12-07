@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require APPPATH.'libraries/mymigration.php';
-
 class Migration_Add_Opcion extends  MyMigration{
 
         protected $table;
@@ -34,17 +32,31 @@ class Migration_Add_Opcion extends  MyMigration{
                         'defaul' => 1
                 );
 
-                $opcion_id = array(
+                $interface_id = array(
+                        'type' => 'int',
+                        'constraint' => '11',
+                        'null'=>FALSE,
+                        'unsigned' => FALSE,
+                        'primary_key'=>TRUE,
+                        'foreign_key' => array(
+                            'table' => 'interface', 
+                            'field' => 'id'
+                        )
+                );
+
+                  $opcion_id = array(
                         'type' => 'INT',
                         'constraint' => '11',
                         'default'=>0,
                          'primary_key' => TRUE
                 );
 
+
                  $fields = array(
                         'id' => $id,
                         'opcion' => $opcion,
                         'enabled' => $enabled,
+                        'interface_id' => $interface_id,
                         'opcion_id' => $opcion_id
                 );
 

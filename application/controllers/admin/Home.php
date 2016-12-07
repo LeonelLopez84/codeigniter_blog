@@ -24,14 +24,12 @@ class Home extends CI_Controller
 
 		$this->load->model('opcion_model');   	
 
-		$this->body['opciones'] = opcion_model::with('subOpcion')->orderBy('opcion','ASC')->where('opcion_id', '=', '0')->get();
+		$this->body['opciones'] = opcion_model::with('subOpcion')->orderBy('opcion','ASC')->where('opcion_id', '=', '0')->where('interface_id','=','1')->get();
 		
 		$this->upload_config['max_size']  = '1000';
 		$this->upload_config['max_width'] = '1024';
 		$this->upload_config['max_height'] = '768';
 		$this->upload_config['overwrite'] = true;
-
-		
 
 	}
 

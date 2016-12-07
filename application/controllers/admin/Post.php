@@ -51,9 +51,8 @@ class Post extends Home {
                             'class'         => 'form-control',
                             'id'            => 'banner',
                             ];
-
     $this->body['article']=[
-                            'name'        => 'article',
+                            'name'       => 'article',
 					       'id'          => 'article',
 					       'value'       => set_value('article'),
 					       'rows'        => '15',

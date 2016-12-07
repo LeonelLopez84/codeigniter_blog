@@ -65,7 +65,6 @@ class Migration_Add_Post extends  MyMigration{
                             'table' => 'author', // table to
                             'field' => 'id' // field to
                         )
-                       
                 );
 
                  $fields = array(
